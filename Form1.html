@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Logs</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+        }
+
+        h1 {
+            color: #660066;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+        }
+
+        .info-text {
+            font-size: 1em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .button {
+            display: inline-block;
+            width: 90%;
+            max-width: 300px;
+            margin: 10px auto;
+            padding: 12px 20px;
+            background-color: #660066;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #800080;
+            transform: scale(1.05);
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.4em;
+            }
+
+            .button {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .logo {
+                width: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Update the src path to your actual image location -->
+        <img src="C:\Users\Mel Robert Yaranon\Documents\.vscode\300501251_483348617131120_4077917631823024973_n.jpg" alt="Company Logo" class="logo">
+
+        <h1>IT Facilities Monitoring and Maintenance System</h1>
+
+        <p class="info-text">Welcome to the IT Facilities Monitoring and Maintenance System. Choose a section to proceed.</p>
+
+        <div class="button-group">
+            <a href="Form2.html" class="button">Maintenance Logs</a>
+            <a href="Form4.html" class="button">History Log</a>
+            <a href="Form3.html" class="button">About Us</a>
+            <a href="Login.html" class="button">Home</a>
+        </div>
+    </div>
+</body>
+
+</html>

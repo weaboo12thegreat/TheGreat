@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #f0f0f0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            min-height: 500px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #660066;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .info-box {
+            background-color: #fafafa;
+            border: 2px solid #660066;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .info-box p {
+            color: #333;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .profile {
+            text-align: center;
+        }
+
+        .profile img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .profile h3 {
+            margin-top: 10px;
+            color: #660066;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .profile p {
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+            font-size: 1em;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 8px;
+            background-color: #660066;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #800080;
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design: Mobile Phones */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                margin: 20px auto;
+                min-height: auto;
+            }
+
+            .profile img {
+                width: 100px;
+                height: 100px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .profile h3 {
+                font-size: 1em;
+            }
+
+            .profile p,
+            .info-box p {
+                font-size: 0.9em;
+            }
+
+            .info-box {
+                padding: 15px;
+            }
+
+            .back-button {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="Form1.html" class="back-button">&#11013;</a> <!-- Back button -->
+
+        <div class="profile">
+            <img src="C:\Users\Mel Robert Yaranon\Documents\.vscode\Mel.jpg" alt="Profile Image">
+            <h3>Mel Robert G. Yaranon</h3>
+            <p>BSIT 2B STUDENT</p>
+        </div>
+
+        <div class="info-box">
+            <p>Hi there! I'm Mel Robert G. Yaranon, a BSIT 2B student from Sapao Guiuan Eastern Samar,I created this project to sir Ranido about IT Facilities and Monitoring System.</p>
+            <p>In my system it utilizing RFID technology to make it easier for admins and technician in maintaining and monitoring IT facilities.</p>
+            <p>In this system it is a simple one but i hope you like it and this is my first time to make a project like this.</p>
+        </div>
+    </div>
+</body>
+
+</html>

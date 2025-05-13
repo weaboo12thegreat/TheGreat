@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Logs</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 8px;
+            background-color: #660066;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #800080;
+            transform: scale(1.05);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #660066;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            word-wrap: break-word;
+            white-space: normal;
+            font-size: 12px;
+        }
+
+        th {
+            background-color: #660066;
+            color: white;
+        }
+
+        .print-button {
+            background-color: #660066;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .print-button:hover {
+            background-color: #800080;
+            transform: scale(1.05);
+        }
+
+        .filter-controls {
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-controls select,
+        .filter-controls input {
+            padding: 8px;
+            font-size: 1em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+                margin: 20px auto;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            th,
+            td {
+                font-size: 10px;
+                padding: 6px;
+            }
+
+            .print-button {
+                font-size: 0.9em;
+                padding: 8px 12px;
+            }
+
+            .back-button {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                padding: 10px;
+                box-shadow: none;
+            }
+
+            .print-button,
+            .back-button,
+            .filter-controls {
+                display: none;
+            }
+
+            table {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            @page {
+                size: A4 landscape;
+                margin: 10mm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="Form4.html" class="back-button">&#11013;</a> <!-- Back Button -->
+
+    <div class="container">
+        <img src="C:\Users\Mel Robert Yaranon\Documents\.vscode\300501251_483348617131120_4077917631823024973_n.jpg" alt="Company Logo" class="logo">
+        <h1>Maintenance Logs</h1>
+
+        <div class="filter-controls">
+            <select id="columnSelect">
+                <option value="">-- Select Field --</option>
+            </select>
+            <input type="text" id="searchInput" placeholder="Search...">
+        </div>
+
+        <table id="data-table">
+            <thead>
+                <tr id="table-head"></tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+    </div>
+
+    <button class="print-button" onclick="printTable()">Print to PDF</button>
+
+    <script>
+        const apiKey = "AIzaSyCVUKLQpeAxnM8TLxYGZ7eZDj3TAmWMiMQ";
+        const sheetId = "1zc-xIWLOBVrBzBo2GmfGXRXGKquK9MWghAaPsProt0I";
+        const sheetName = "Sheet1";
+
+        async function fetchSheetData() {
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (data.values) {
+                    populateTable(data.values);
+                    populateColumnSelect(data.values[0]);
+                } else {
+                    document.getElementById("table-body").innerHTML = "<tr><td colspan='100%'>No data available</td></tr>";
+                }
+            } catch (error) {
+                document.getElementById("table-body").innerHTML = "<tr><td colspan='100%'>Failed to load data</td></tr>";
+            }
+        }
+
+        function populateTable(data) {
+            const tableHead = document.getElementById("table-head");
+            const tableBody = document.getElementById("table-body");
+
+            tableHead.innerHTML = "";
+            tableBody.innerHTML = "";
+
+            if (!data || data.length === 0) {
+                tableBody.innerHTML = "<tr><td colspan='100%'>No data available</td></tr>";
+                return;
+            }
+
+            data[0].forEach(header => {
+                let th = document.createElement("th");
+                th.textContent = header;
+                tableHead.appendChild(th);
+            });
+
+            data.slice(1).forEach(row => {
+                let tr = document.createElement("tr");
+                row.forEach(cell => {
+                    let td = document.createElement("td");
+                    td.textContent = cell || "";
+                    tr.appendChild(td);
+                });
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function populateColumnSelect(headers) {
+            const select = document.getElementById("columnSelect");
+            headers.forEach((header, index) => {
+                const option = document.createElement("option");
+                option.value = index;
+                option.textContent = header;
+                select.appendChild(option);
+            });
+        }
+
+        function filterTable() {
+            const columnIndex = document.getElementById("columnSelect").value;
+            const filterText = document.getElementById("searchInput").value.toLowerCase();
+            const rows = document.querySelectorAll("#table-body tr");
+
+            rows.forEach(row => {
+                const cells = row.querySelectorAll("td");
+                if (columnIndex === "") {
+                    row.style.display = "";
+                } else {
+                    const cell = cells[columnIndex];
+                    if (cell && cell.textContent.toLowerCase().includes(filterText)) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                }
+            });
+        }
+
+        function printTable() {
+            window.print();
+        }
+
+        document.getElementById("columnSelect").addEventListener("change", filterTable);
+        document.getElementById("searchInput").addEventListener("input", filterTable);
+
+        fetchSheetData();
+    </script>
+</body>
+
+</html>

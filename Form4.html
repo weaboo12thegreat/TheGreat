@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Logs</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #f0f0f0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            min-height: 500px;
+            text-align: center;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 8px;
+            background-color: #660066;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #800080;
+            transform: scale(1.05);
+        }
+
+        .logo {
+            width: 120px;
+            max-width: 100%;
+            display: block;
+            margin: 40px auto 15px;
+        }
+
+        h1 {
+            color: #660066;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .button {
+            display: block;
+            width: 80%;
+            max-width: 300px;
+            margin: 15px auto;
+            padding: 15px;
+            background-color: #660066;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 1em;
+        }
+
+        .button:hover {
+            background-color: #800080;
+            transform: scale(1.05);
+        }
+
+        .info-text {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive for Mobile */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                margin: 20px auto;
+                min-height: auto;
+            }
+
+            .logo {
+                width: 80px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .info-text {
+                font-size: 1em;
+            }
+
+            .button {
+                font-size: 0.9em;
+                padding: 12px;
+            }
+
+            .back-button {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="Form1.html" class="back-button">&#11013;</a> <!-- Back Button -->
+
+        <!-- Use relative path or web path instead of C:/ -->
+        <img src="C:\Users\Mel Robert Yaranon\Documents\.vscode\300501251_483348617131120_4077917631823024973_n.jpg" alt="Company Logo" class="logo">
+
+        <h1>Welcome to History Log</h1>
+
+        <p class="info-text">Please choose a section to proceed.</p>
+
+        <a href="Form5.html" class="button">Maintenance Logs</a>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+        }
+
+        h1 {
+            color: #660066;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .input-field {
+            width: 100%;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #660066;
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #660066;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .eye-icon:hover {
+            color: #800080;
+            transform: translateY(-50%) scale(1.4);
+        }
+
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #660066;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background-color: #800080;
+            transform: scale(1.05);
+        }
+
+        .info-text {
+            font-size: 1em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Make it responsive for small phones */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                border-radius: 8px;
+            }
+
+            .input-field, .button {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .logo {
+                width: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="C:\Users\Mel Robert Yaranon\Documents\.vscode\300501251_483348617131120_4077917631823024973_n.jpg"
+            alt="Company Logo" class="logo">
+        <h1>Login</h1>
+
+        <p class="info-text">Please enter your username and password to continue.</p>
+
+        <form id="loginForm">
+            <input type="text" id="username" class="input-field" placeholder="Enter Username" required>
+
+            <div class="password-container">
+                <input type="password" id="password" class="input-field" placeholder="Enter Password" required>
+                <i id="togglePassword" class="fas fa-eye eye-icon" onclick="togglePassword()"></i>
+            </div>
+
+            <button type="submit" class="button">Login</button>
+        </form>
+    </div>
+
+    <script>
+        // Submit login when pressing Enter
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            checkPassword();
+        });
+
+        // Allow submission when the Enter key is pressed in the password or username field
+        document.getElementById("loginForm").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent form from submitting by default
+                checkPassword(); // Call the login function
+            }
+        });
+
+        function checkPassword() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            var correctUsername = "Admin";
+            var correctPassword = "12345";
+
+            if (username === correctUsername && password === correctPassword) {
+                window.location.href = "Form1.html";
+            } else {
+                alert("Incorrect username or password. Please try again.");
+                document.getElementById("password").value = "";
+            }
+        }
+
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var eyeIcon = document.getElementById("togglePassword");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            }
+        }
+
+        // Autofocus on username when page loads
+        window.onload = function () {
+            document.getElementById("username").focus();
+        };
+    </script>
+</body>
+
+</html>

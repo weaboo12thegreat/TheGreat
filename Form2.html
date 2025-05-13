@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Log Entry</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 600px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            min-height: 500px;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
+            background-color: #660066;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background-color: #800080;
+        }
+
+        h1 {
+            text-align: center;
+            color: #660066;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 100%;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 10px;
+            font-size: 14px;
+            width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group-half {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-group-half .form-group {
+            width: 48%;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+        }
+
+        .button-group {
+            grid-column: span 2;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button-group button {
+            padding: 12px 25px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 22%;
+            min-width: 120px;
+        }
+
+        .button-group .create-btn {
+            background-color: #660066;
+            color: white;
+        }
+
+        .button-group .read-btn {
+            background-color: #660066;
+            color: white;
+        }
+
+        .button-group .update-btn {
+            background-color: #660066;
+            color: white;
+        }
+
+        .button-group .delete-btn {
+            background-color: #660066;
+            color: white;
+        }
+
+        .button-group button:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+
+       
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 8px;
+            background-color: #660066;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            transition: background-color 0.3s ease;
+        }
+
+       
+        .back-button:hover {
+            background-color: #800080;
+            transform: scale(1.05);
+        }
+
+
+        .error {
+            border: 1px solid red !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <a href="Form1.html" class="back-button">&#11013;</a> <!-- Bolder arrow -->
+
+        <h1>Enter Asset Maintenance Log</h1>
+        <form id="maintenanceForm" action="#" method="post">
+
+            <div class="form-group-half">
+                <div class="form-group">
+                    <label for="rfidID">RFID</label>
+                    <input type="text" id="rfidID" name='rfidID' maxlength="10"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <span class="error-message" id="rfidError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="assetID">Asset ID</label>
+                    <input type="text" id="assetID" name="assetID" maxlength="6"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <span class="error-message" id="assetIDError"></span>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name='date'>
+                <span class="error-message" id="dateError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name='name'>
+                <span class="error-message" id="nameError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role" name='role'>
+                    
+                    <option value="admin">Admin</option>
+                    <option value="technician">Technician</option>
+                </select>
+                <span class="error-message" id="roleError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="facility">Facility</label>
+                <input type="text" id="facility" name='facility'>
+                <span class="error-message" id="facilityError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="activity">Activity</label>
+                <input type="text" id="activity" name='activity'>
+                <span class="error-message" id="activityError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name='description' rows="4"></textarea>
+                <span class="error-message" id="descriptionError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="unit">Unit</label>
+                <input type="text" id="unit" name='unit'>
+                <span class="error-message" id="unitError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="osVersion">OS Version</label>
+                <input type="text" id="osVersion" name='osVersion'>
+                <span class="error-message" id="osVersionError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="installedRam">Installed RAM</label>
+                <input type="text" id="installedRam" name='installedRam'>
+                <span class="error-message" id="installedRamError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="processor">Processor</label>
+                <input type="text" id="processor" name='processor'>
+                <span class="error-message" id="processorError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select id="status" name='status'>
+                    <option value="">Select Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="under_maintenance">Under Maintenance</option>
+                    <option value="retired">Retired</option>
+                </select>
+                <span class="error-message" id="statusError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="lastMaintenanceDate">Last Maintenance Date</label>
+                <input type="date" id="lastMaintenanceDate" name='lastMaintenanceDate'>
+                <span class="error-message" id="lastMaintenanceDateError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="nextMaintenanceDue">Next Maintenance Due</label>
+                <input type="date" id="nextMaintenanceDue" name='nextMaintenanceDue'>
+                <span class="error-message" id="nextMaintenanceDueError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="nextServiceDue">Next Service Due</label>
+                <input type="date" id="nextServiceDue" name='nextServiceDue'>
+                <span class="error-message" id="nextServiceDueError"></span>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="create-btn">Create</button>
+                <button type="button" class="read-btn">Read</button>
+                <button type="button" class="update-btn">Update</button>
+                <button type="reset" class="delete-btn">Delete</button>
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+        // Handle the "Create" button click with RFID duplicate check
+        document.querySelector('.create-btn').addEventListener('click', function (e) {
+            e.preventDefault();  // Prevent default button behavior
+
+            const rfidID = document.getElementById('rfidID').value.trim();  // Get RFID ID from the input field
+
+            if (!rfidID) {
+                alert("Please enter an RFID ID.");
+                return;
+            }
+
+            // First, check if RFID ID exists in the database (Google Sheets)
+            fetch(`https://script.google.com/macros/s/AKfycbxjUqP3FsuXdNiCOiYuiR_3rbQH6qyLJmyA1lVdVA9JUkwLug_ahPwN2TQWf-JlwzxO/exec?rfidID=${rfidID}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        alert("This RFID ID already exists. Duplicates are not allowed.");
+                    } else {
+                        // If RFID is unique, proceed with data submission
+                        if (validateForm()) {
+                            const form = document.getElementById('maintenanceForm');
+                            const formData = new FormData(form);
+
+                            const recordData = {};
+                            formData.forEach((value, key) => {
+                                recordData[key] = value;
+                            });
+
+                            fetch('https://script.google.com/macros/s/AKfycbxjUqP3FsuXdNiCOiYuiR_3rbQH6qyLJmyA1lVdVA9JUkwLug_ahPwN2TQWf-JlwzxO/exec', {
+                                method: 'POST',
+                                contentType: 'application/json',
+                                body: JSON.stringify(recordData)
+                            })
+                                .then(response => response.text())
+                                .then(result => {
+                                    alert("Data successfully submitted.");
+                                    console.log(result);
+                                    form.reset();
+                                })
+                                .catch(error => {
+                                    alert("Error submitting data.");
+                                    console.error(error);
+                                });
+                        }
+                    }
+                })
+                .catch(error => {
+                    alert("Error checking RFID ID.");
+                    console.error(error);
+                });
+        });
+
+
+
+
+        // Function to validate form inputs
+        function validateForm() {
+            let isValid = true;
+            document.querySelectorAll(".error-message").forEach(el => el.textContent = "");
+
+            const requiredFields = ["rfidID", "assetID", "date", "name", "role", "facility", "activity", "status", "description", "unit", "osVersion", "installedRam", "processor", "lastMaintenanceDate", "nextMaintenanceDue", "nextServiceDue"];
+            requiredFields.forEach(id => {
+                const input = document.getElementById(id);
+                if (!input.value.trim()) {
+                    document.getElementById(id + "Error").textContent = "This field is required.";
+                    input.classList.add("error");
+                    isValid = false;
+                } else {
+                    input.classList.remove("error");
+                }
+            });
+
+            return isValid;
+        }
+
+        // Handle the "Read" button click
+        document.querySelector('.read-btn').addEventListener('click', function (e) {
+            e.preventDefault();  // Prevent default button behavior
+
+            const rfidID = document.getElementById('rfidID').value.trim();  // Get the RFID ID from the input field
+
+            if (!rfidID) {
+                alert("Please enter an RFID ID to fetch the data.");
+                return;
+            }
+
+            // Function to format date into 'yyyy-mm-dd'
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;  // Return formatted date as yyyy-mm-dd
+            }
+
+            // Fetch data from Google Apps Script (doGet)
+            fetch(`https://script.google.com/macros/s/AKfycbxjUqP3FsuXdNiCOiYuiR_3rbQH6qyLJmyA1lVdVA9JUkwLug_ahPwN2TQWf-JlwzxO/exec?rfidID=${rfidID}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const entry = data[0]; // Since it's an array, we get the first (and only) match
+
+                        // Populate the form fields with the fetched data
+                        document.getElementById('assetID').value = entry.assetID;
+                        document.getElementById('date').value = formatDate(entry.date);  // Format and set the date
+                        document.getElementById('name').value = entry.name;
+                        document.getElementById('role').value = entry.role;
+                        document.getElementById('facility').value = entry.facility;
+                        document.getElementById('activity').value = entry.activity;
+                        document.getElementById('description').value = entry.description;
+                        document.getElementById('unit').value = entry.unit;
+                        document.getElementById('osVersion').value = entry.osVersion;
+                        document.getElementById('installedRam').value = entry.installedRam;
+                        document.getElementById('processor').value = entry.processor;
+                        document.getElementById('status').value = entry.status;
+                        document.getElementById('lastMaintenanceDate').value = formatDate(entry.lastMaintenanceDate);  // Format and set the last maintenance date
+                        document.getElementById('nextMaintenanceDue').value = formatDate(entry.nextMaintenanceDue);  // Format and set the next maintenance due date
+                        document.getElementById('nextServiceDue').value = formatDate(entry.nextServiceDue);  // Format and set the next service due date
+                    } else {
+                        alert("No data found for the provided RFID ID.");
+                    }
+                })
+                .catch(error => {
+                    alert("Error fetching data.");
+                    console.error(error);
+                });
+        });
+
+        // Handle the "Update" button click
+        document.querySelector('.update-btn').addEventListener('click', function (e) {
+            e.preventDefault();  // Prevent default button behavior
+
+            const rfidID = document.getElementById('rfidID').value.trim();  // Get RFID ID from the input field
+
+            if (!rfidID) {
+                alert("Please enter an RFID ID to update the data.");
+                return;
+            }
+
+            if (validateForm()) {
+                const form = document.getElementById('maintenanceForm');
+                const formData = new FormData(form);
+
+                const recordData = {};
+                formData.forEach((value, key) => {
+                    recordData[key] = value;
+                });
+
+                recordData["action"] = "update"; // Define action for Google Apps Script
+
+                fetch('https://script.google.com/macros/s/AKfycbzk1d8Xl_0xqkx_JPtodINiwRUkyMnK33s0krHbjOMm2Z5MoxMNGNCSme3v3eLSfumL/exec', {
+                    method: 'POST',
+                    contentType: 'application/json',
+                    body: JSON.stringify(recordData)
+                })
+                    .then(response => response.text())
+                    .then(result => {
+                        alert("Data successfully updated.");
+                        console.log(result);
+                        form.reset();
+                    })
+                    .catch(error => {
+                        alert("Error updating data.");
+                        console.error(error);
+                    });
+            }
+        });
+
+        // Handle the "Delete" button click
+        document.querySelector('.delete-btn').addEventListener('click', function (e) {
+            e.preventDefault();  // Prevent default button behavior
+
+            const rfidID = document.getElementById('rfidID').value.trim();  // Get RFID ID from the input field
+
+            if (!rfidID) {
+                alert("Please enter an RFID ID to delete the data.");
+                return;
+            }
+
+            if (confirm("Are you sure you want to delete this record?")) {
+                fetch('https://script.google.com/macros/s/AKfycbzk1d8Xl_0xqkx_JPtodINiwRUkyMnK33s0krHbjOMm2Z5MoxMNGNCSme3v3eLSfumL/exec', {
+                    method: 'POST',
+                    contentType: 'application/json',
+                    body: JSON.stringify({ rfidID: rfidID, action: "delete" })
+                })
+                    .then(response => response.text())
+                    .then(result => {
+                        alert("Data successfully deleted.");
+                        console.log(result);
+                        document.getElementById('maintenanceForm').reset();  // Clear the form after deletion
+                    })
+                    .catch(error => {
+                        alert("Error deleting data.");
+                        console.error(error);
+                    });
+            }
+        });
+
+
+
+    </script>
+
+
+</body>
+
+</html>
